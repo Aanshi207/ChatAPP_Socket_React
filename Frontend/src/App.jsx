@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { ThemeProvider, CssBaseline, Container, Box, Skeleton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import Signin from "./component/auth/Signin";
 import Signup from "./component/auth/Signup";
 import SocketContextProvider from "./context/SocketContextProvider";
@@ -10,10 +10,13 @@ import Dashboard from "./component/dashboard/Dashboard";
 import Profile from "./component/dashboard/user/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { checkUserAuth } from "./features/login/signinSlice";
+import SigninSkeleton from "./component/auth/SigninSkeleton";
 
 const App = () => {
   const theme = lightTheme;
   const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.signin);
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -24,7 +27,10 @@ const App = () => {
       <CssBaseline />
 
       <SocketContextProvider>
-        <BrowserRouter>
+        {loading ? (
+          
+          <SigninSkeleton />
+        )  : (<BrowserRouter>
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
@@ -45,7 +51,7 @@ const App = () => {
               } 
             />
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter>)}
       </SocketContextProvider>
     </ThemeProvider>
   );
