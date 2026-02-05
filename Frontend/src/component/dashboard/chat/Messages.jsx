@@ -306,7 +306,7 @@ function Messages({
                         {msg.text}
                       </Typography>
 
-                      {/* <Typography
+                      <Typography
                         variant="caption"
                         sx={{
                           color: "text.secondary",
@@ -321,7 +321,7 @@ function Messages({
                               timeOptions,
                             )
                           : "Sending..."}
-                      </Typography> */}
+                      </Typography>
                     </Box>
                   </Paper>
                 </Box>
