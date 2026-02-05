@@ -296,7 +296,7 @@ function Messages({
                         display: "flex",
                         alignItems: "flex-end",
                         justifyContent: "space-between",
-                        gap: 5,
+                        gap: 2,
                       }}
                     >
                       <Typography
