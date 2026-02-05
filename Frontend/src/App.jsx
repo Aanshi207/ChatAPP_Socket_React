@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { useDispatch } from "react-redux";
-
 import Signin from "./component/auth/Signin";
 import Signup from "./component/auth/Signup";
 import SocketContextProvider from "./context/SocketContextProvider";

@@ -180,7 +180,7 @@ function Messages({
                     src={msg.image}
                     alt="Sent image"
                     sx={{
-                      maxWidth: { xs: "35%", md: "10%" },
+                      maxWidth: { xs: "35%", md: "30%" },
                       borderRadius: "12px",
                       display: "block",
                       objectFit: "cover",
