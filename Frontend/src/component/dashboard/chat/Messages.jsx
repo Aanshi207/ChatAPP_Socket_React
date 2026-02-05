@@ -16,7 +16,6 @@ import {
   receiveSocketDelete,
   receiveSocketMessage,
   receiveSocketUpdate,
-  updateMessageThunk,
 } from "../../../features/chat/chatSlice";
 import { useSocket } from "../../../hooks/useSocket";
 

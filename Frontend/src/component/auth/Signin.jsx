@@ -24,7 +24,7 @@ export default function Signin() {
   };
 
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex" }}>
+    <Box sx={{  display: "flex" }}>
       <Box sx={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "background.default" }}>
         <Paper elevation={6} sx={{ width: { xs: "90%", lg: "100%" }, maxWidth: 700, p: 4, borderRadius: 3 }}>
           <Typography display="block" align="center" variant="h5" sx={{ background: "linear-gradient(90deg, #3BC9C9, #8E7CE6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
