@@ -9,6 +9,7 @@ import SocketContextProvider from "./context/SocketContextProvider";
 import { lightTheme } from "./Theme";
 import Dashboard from "./component/dashboard/Dashboard";
 import Profile from "./component/dashboard/user/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { checkUserAuth } from "./features/login/signinSlice";
 
 const App = () => {
@@ -28,8 +29,22 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </BrowserRouter>
       </SocketContextProvider>

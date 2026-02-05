@@ -10,7 +10,6 @@ const colors = {
   white: "#ffffff",
 };
 
-/* ---------- LIGHT THEME ---------- */
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -128,7 +127,6 @@ export const lightTheme = createTheme({
   },
 });
 
-/* ---------- DARK THEME ---------- */
 export const darkTheme = createTheme({
   palette: {
     mode: "dark",
