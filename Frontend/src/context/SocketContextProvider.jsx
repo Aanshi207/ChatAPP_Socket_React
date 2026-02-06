@@ -16,6 +16,7 @@ const SocketContextProvider = ({ children }) => {
       console.log("Creating socket connection for user:", user._id);
       const socketInstance = io(BASE_URL, {
         reconnection: true,
+        transports: ["websocket", "polling"],
         query: {
           userId: user._id,
         },
