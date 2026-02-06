@@ -6,8 +6,9 @@ import {
   Tooltip,
   InputAdornment,
   Avatar,
+  Popover,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SentimentSatisfiedAltOutlinedIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
 import AttachmentOutlinedIcon from "@mui/icons-material/AttachmentOutlined";
 import CloseIcon from "@mui/icons-material/Close";
@@ -18,6 +19,8 @@ import {
   postMessage,
   updateMessageThunk,
 } from "../../../features/chat/chatSlice";
+import { fetchEmoji } from "../../../features/emoji/emojiSlice";
+import EmojiCard from "./EmojiCard";
 
 function SendMessage({
   selectedUser,
@@ -29,9 +32,14 @@ function SendMessage({
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.signin);
+
+  useEffect(() => {
+    dispatch(fetchEmoji());
+  }, [dispatch]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -79,17 +87,31 @@ function SendMessage({
     clearImage();
   };
 
-  const handleCancelEdit = () => {
-    setEditingId(null);
-    setEditValue("");
-  };
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleSendMessage();
     }
   };
+
+  const handleEmojiClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  }
+
+  const handleEmojiClose =() =>{
+    setAnchorEl(null);
+  }
+  const handleSelectEmoji = (emoji) => {
+    if (editingId) {
+      // setEditValue(emoji);
+      setEditValue((prev) => prev + emoji);
+    } else {
+      // setMessage(emoji);
+      setMessage((prev) => prev + emoji);
+    }
+  };
+
+  const open = Boolean(anchorEl);
 
   const canSend =
     (editingId ? editValue?.trim() : message?.trim()) || imageFile;
@@ -115,9 +137,20 @@ function SendMessage({
               transition: "all 0.3s ease",
               "&:hover": { color: "primary.main" },
             }}
+            onClick={handleEmojiClick}
           >
             <SentimentSatisfiedAltOutlinedIcon />
           </IconButton>
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleEmojiClose}
+            anchorOrigin={{ vertical: "top", horizontal: "left" }}
+            transformOrigin={{ vertical: "bottom", horizontal: "left" }}
+            PaperProps={{ sx: { width: 300, borderRadius: 2 } }}
+          >
+            <EmojiCard onSelect={handleSelectEmoji} />
+          </Popover>
         </Tooltip>
         <Tooltip arrow>
           <IconButton
