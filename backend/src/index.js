@@ -37,6 +37,6 @@ app.use('/chat', chat_router)
 //   })
 // }
 
-server.listen(port, () => {
-  console.log("Server ready on port 5000.");
-})
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
+});
